@@ -1,0 +1,12 @@
+<?php
+
+namespace Neputer\Traits;
+
+/**
+ * Trait {CLASS_NAME}Trait
+ * @package Neputer\Traits
+ */
+trait {CLASS_NAME}Trait
+{
+    //
+}

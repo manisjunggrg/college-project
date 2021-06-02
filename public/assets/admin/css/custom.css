@@ -1,0 +1,17 @@
+label.has-error {
+  color: #ed5565
+}
+
+label.is_required:after {
+  content:" *";
+  color: #ed5565;
+}
+
+.ibox-button .btn{
+    padding: 10px 45px;
+    width: 80%;
+}
+
+.ibox-button .btn:hover{
+    background: #2f806f;
+}

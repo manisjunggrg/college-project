@@ -1,0 +1,30 @@
+<?php
+
+namespace Neputer\Services;
+
+use Neputer\Entities\{CLASS_NAME};
+
+/**
+ * Class {CLASS_NAME}Service
+ * @package Neputer\Services
+ */
+class {CLASS_NAME}Service
+{
+
+    /**
+     * The {CLASS_NAME} instance
+     *
+     * @var $model
+     */
+    protected $model;
+
+    /**
+     * {CLASS_NAME}Service constructor.
+     * @param {CLASS_NAME} ${VAR_CLASS_NAME}
+     */
+    public function __construct({CLASS_NAME} ${VAR_CLASS_NAME})
+    {
+        $this->model = ${VAR_CLASS_NAME};
+    }
+
+}
