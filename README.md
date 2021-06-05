@@ -1,25 +1,39 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-## About e-government
-This project includes the laravel framework. In this project we want to conclude about the 
-census counting model of population. which also included the health and education information.
-
-#Login for admin
-``````````````
-*  Run the migration and seeders: `php artisan migrate --seed`
-*  Run the application: `php artisan serve`
-*  Login as Root and create population (by clicking on edit button) at: [http://localhost:8000/admin/population](http://localhost:8000/admin/population)
-``````````````
 
 ### Login Credentials
-* Root(Admin) : `root@neputer.com` : `secret`
+* Root(Admin) : `root@kathford.com` : `secret`
 
-# Backend Development Instructions
+### Backend Development Instructions
 
-Before using command : `php artisan neputer:generate model-name`
 
-Make Sure :
-- composer install
+### Final Year Project in E-Health
 
-### login Credentials for new created users
-* User Name : `firstName + LastName @gmail.com` : `firstName@123`
-* Deepak khadka : `deepakkhadka@gmail.com` : `deepak@123`
+1. Install `Composer` dependencies.
+
+        composer install
+
+
+3. Copy `.env.example` file and create duplicate. Use `cp` command for Linux or Max user.
+
+        cp .env.example .env
+
+   If you are using `Windows`, use `copy` instead of `cp`.
+
+        copy .env.example .env
+
+
+4. Create a table in MySQL database and fill the database details `DB_DATABASE` in `.env` file.
+
+
+5. The below command will create tables into database using Laravel migration and seeder.
+
+        php artisan migrate:fresh --seed
+
+
+6. Generate your application encryption key:
+
+        php artisan key:generate
+
+
+7. Start the localhost server:
+
+        php artisan serve
