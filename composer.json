@@ -40,11 +40,11 @@
     },
     "autoload": {
         "files": [
-            "Neputer/Support/helper.php"
+            "Kathford/Support/helper.php"
         ],
         "psr-4": {
             "App\\": "app/",
-            "Neputer\\": "Neputer/",
+            "Kathford\\": "Kathford/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }

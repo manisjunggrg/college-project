@@ -1,0 +1,13 @@
+<?php
+
+namespace Kathford\Observers;
+
+/**
+ * Class {CLASS_NAME}Observer
+ * @package Kathford\Observers
+ */
+class {CLASS_NAME}Observer extends BaseObserver
+{
+
+}
+

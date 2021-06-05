@@ -1,0 +1,12 @@
+<?php
+
+namespace Kathford\Traits;
+
+/**
+ * Trait {CLASS_NAME}Trait
+ * @package Kathford\Traits
+ */
+trait {CLASS_NAME}Trait
+{
+    //
+}

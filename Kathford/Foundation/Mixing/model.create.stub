@@ -1,0 +1,16 @@
+<?php
+
+namespace Kathford\Entities;
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{ Model }} extends Model
+{
+
+    protected $table = '';
+
+    protected $fillable = [
+
+       ];
+
+}

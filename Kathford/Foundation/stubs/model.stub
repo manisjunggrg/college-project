@@ -1,0 +1,19 @@
+<?php
+
+namespace Kathford\Entities;
+
+use Kathford\Entities\BaseModel as Model;
+
+class {CLASS_NAME} extends Model
+{
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        //
+    ];
+
+}

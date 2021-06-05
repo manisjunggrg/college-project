@@ -22,7 +22,7 @@ Route::group(
     ['middleware' => ['auth'],
         'prefix' => 'admin/',
         'as' => 'admin.',
-        'namespace' => 'Neputer\\Controller\\Admin\\'],
+        'namespace' => 'Kathford\\Controller\\Admin\\'],
 
     function () {
            Route::resource('category','CategoryController');

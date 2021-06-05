@@ -7,8 +7,8 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Neputer\AdminController\BaseController;
-use Neputer\Services\UserServices;
+use Kathford\AdminController\BaseController;
+use Kathford\Services\UserServices;
 
 class ProfileController extends BaseController
 {

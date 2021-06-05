@@ -174,8 +174,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Neputer\ServiceProvider\NeputerProviderServiceProvider::class,
-        \Neputer\ServiceProvider\ComposerServiceProvider::class
+        Kathford\ServiceProvider\KathfordProviderServiceProvider::class,
+        \Kathford\ServiceProvider\ComposerServiceProvider::class
 
     ],
 

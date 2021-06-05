@@ -1,0 +1,120 @@
+<?php
+
+namespace App\Http\Controllers{MODEL_NAMESPACE};
+
+use Illuminate\Http\Request;
+use Kathford\Services\{CLASS_NAME}Service;
+use Kathford\Entities\{CLASS_NAME};
+use Kathford\Controller\BaseController;
+use Kathford\Requests\{CLASS_NAME}\{
+    StoreRequest,
+    UpdateRequest
+};
+
+/**
+ * Class {CLASS_NAME}Controller
+ * @package App\Http\Controllers
+ */
+class {CLASS_NAME}Controller extends BaseController
+{
+    protected $view_path = '{LOWER_CLASS_NAME}';
+    protected $base = "{LOWER_CLASS_NAME}";
+    /**
+         * The {CLASS_NAME}Service instance
+         *
+         * @var {VAR_CLASS_NAME}Service
+         */
+        protected  {VAR_CLASS_NAME}Service;
+    public function __construct({CLASS_NAME}Service {VAR_CLASS_NAME}Service)
+    {
+            parent::__construct();
+        $this->{SMALL_CASE_CLASS_NAME}Service = {VAR_CLASS_NAME}Service;
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $data = [];
+        $data['{LOWER_CLASS_NAME}s'] = $this->{SMALL_CASE_CLASS_NAME}Service->get($this->pagination_limit);
+        return view(parent::__parseDataToView($this->view_path.'.index'), compact('data'));
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $data = [];
+        //
+        return view(parent::__parseDataToView($this->view_path.'.create'), compact('data'));
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreRequest $request)
+    {
+        {Var_LOWER_CLASS_NAME} = $this->{SMALL_CASE_CLASS_NAME}Service->new($request->all());
+        flash('Record successfully created.')->success();
+        return $this->redirect($request);
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  {CLASS_NAME} {VAR_CLASS_NAME}
+     * @return \Illuminate\Http\Response
+     */
+    public function show({CLASS_NAME} {VAR_CLASS_NAME})
+    {
+        $data = [];
+        $data['{LOWER_CLASS_NAME}'] = {VAR_CLASS_NAME};
+        return view(parent::__parseDataToView($this->view_path.'.show'), compact('data'));
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  {CLASS_NAME} {VAR_CLASS_NAME}
+     * @return \Illuminate\Http\Response
+     */
+    public function edit({CLASS_NAME} {VAR_CLASS_NAME})
+    {
+        $data = [];
+        $data['{LOWER_CLASS_NAME}']  = {VAR_CLASS_NAME};
+        return view(parent::__parseDataToView($this->view_path.'.edit'), compact('data'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  {CLASS_NAME} {VAR_CLASS_NAME}
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateRequest $request, {CLASS_NAME} {VAR_CLASS_NAME})
+    {
+        {Var_LOWER_CLASS_NAME} = $this->{SMALL_CASE_CLASS_NAME}Service->update(
+                    $request->all(), {VAR_CLASS_NAME});
+        flash('Record successfully updated.')->success();
+        return $this->redirect($request);
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  {CLASS_NAME} {VAR_CLASS_NAME}
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy({CLASS_NAME} {VAR_CLASS_NAME})
+    {
+        $this->{SMALL_CASE_CLASS_NAME}Service->destroy({VAR_CLASS_NAME});
+        return response()
+              ->json([
+                  'type'    => 'success',
+                  'message' => 'Record successfully deleted.'
+              ]);
+    }
+}

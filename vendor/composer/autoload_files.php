@@ -39,5 +39,5 @@ return array(
     '4a1f389d6ce373bda9e57857d3b61c84' => $vendorDir . '/barryvdh/laravel-debugbar/src/helpers.php',
     'ed962a97bd972bc82007176b647d4e36' => $vendorDir . '/facade/ignition/src/helpers.php',
     'f18cc91337d49233e5754e93f3ed9ec3' => $vendorDir . '/laravelcollective/html/src/helpers.php',
-    'c2a03e213e95d14f28d0ca14b69110a4' => $baseDir . '/Neputer/Support/helper.php',
+    '0a86c64fcfd6ae1523da84d7ccd6f682' => $baseDir . '/Kathford/Support/helper.php',
 );
