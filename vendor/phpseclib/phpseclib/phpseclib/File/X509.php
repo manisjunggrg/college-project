@@ -670,14 +670,25 @@ class X509
      */
     private function mapOutExtensions(&$root, $path)
     {
-        foreach ($this->extensionValues as $id => $value) {
-            $root['tbsCertificate']['extensions'][] = [
+        $extensions = &$this->subArray($root, $path, !empty($this->extensionValues));
+
+        foreach ($this->extensionValues as $id => $data) {
+            extract($data);
+            $newext = [
                 'extnId' => $id,
                 'extnValue' => $value,
+                'critical' => $critical
             ];
+            if ($replace) {
+                foreach ($extensions as $key => $value) {
+                    if ($value['extnId'] == $id) {
+                        $extensions[$key] = $newext;
+                        continue 2;
+                   }
+                }
+            }
+            $extensions[] = $newext;
         }
-
-        $extensions = &$this->subArray($root, $path);
 
         if (is_array($extensions)) {
             $size = count($extensions);
@@ -2604,7 +2615,7 @@ class X509
         if ($signatureAlgorithm != 'id-RSASSA-PSS') {
             $signatureAlgorithm = ['algorithm' => $signatureAlgorithm];
         } else {
-            $r = PSS::load($issuer->privateKey->toString('PSS'));
+            $r = PSS::load($issuer->privateKey->withPassword()->toString('PSS'));
             $signatureAlgorithm = [
                 'algorithm' => 'id-RSASSA-PSS',
                 'parameters' => PSS::savePSSParams($r)
@@ -2751,7 +2762,7 @@ class X509
 
             $this->setExtension(
                 'id-ce-basicConstraints',
-                array_unique(array_merge(['cA' => true], $basicConstraints)),
+                array_merge(['cA' => true], $basicConstraints),
                 true
             );
 
@@ -4079,9 +4090,11 @@ class X509
      *
      * @param string $id
      * @param mixed $value
+     * @param bool $critical
+     * @param bool $replace
      */
-    public function setExtensionValue($id, $value)
+    public function setExtensionValue($id, $value, $critical = false, $replace = false)
     {
-        $this->extensionValues[$id] = $value;
+        $this->extensionValues[$id] = compact('critical', 'replace', 'value');
     }
 }

@@ -13,6 +13,7 @@ namespace Symfony\Component\HttpKernel;
 
 use Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator;
 use Symfony\Bridge\ProxyManager\LazyProxy\PhpDumper\ProxyDumper;
+use Symfony\Component\Config\Builder\ConfigBuilderGenerator;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;
@@ -74,19 +75,22 @@ abstract class Kernel implements KernelInterface, RebootableInterface, Terminabl
 
     private static $freshCache = [];
 
-    public const VERSION = '5.2.3';
-    public const VERSION_ID = 50203;
+    public const VERSION = '5.3.2';
+    public const VERSION_ID = 50302;
     public const MAJOR_VERSION = 5;
-    public const MINOR_VERSION = 2;
-    public const RELEASE_VERSION = 3;
+    public const MINOR_VERSION = 3;
+    public const RELEASE_VERSION = 2;
     public const EXTRA_VERSION = '';
 
-    public const END_OF_MAINTENANCE = '07/2021';
-    public const END_OF_LIFE = '07/2021';
+    public const END_OF_MAINTENANCE = '01/2022';
+    public const END_OF_LIFE = '01/2022';
 
     public function __construct(string $environment, bool $debug)
     {
-        $this->environment = $environment;
+        if (!$this->environment = $environment) {
+            throw new \InvalidArgumentException(sprintf('Invalid environment provided to "%s": the environment cannot be empty.', get_debug_type($this)));
+        }
+
         $this->debug = $debug;
     }
 
@@ -177,7 +181,7 @@ abstract class Kernel implements KernelInterface, RebootableInterface, Terminabl
     /**
      * {@inheritdoc}
      */
-    public function handle(Request $request, int $type = HttpKernelInterface::MASTER_REQUEST, bool $catch = true)
+    public function handle(Request $request, int $type = HttpKernelInterface::MAIN_REQUEST, bool $catch = true)
     {
         if (!$this->booted) {
             $container = $this->container ?? $this->preBoot();
@@ -199,7 +203,7 @@ abstract class Kernel implements KernelInterface, RebootableInterface, Terminabl
     }
 
     /**
-     * Gets a HTTP kernel from the container.
+     * Gets an HTTP kernel from the container.
      *
      * @return HttpKernelInterface
      */
@@ -466,7 +470,7 @@ abstract class Kernel implements KernelInterface, RebootableInterface, Terminabl
                 if (!flock($lock, $wouldBlock ? \LOCK_SH : \LOCK_EX)) {
                     fclose($lock);
                     $lock = null;
-                } elseif (!\is_object($this->container = include $cachePath)) {
+                } elseif (!is_file($cachePath) || !\is_object($this->container = include $cachePath)) {
                     $this->container = null;
                 } elseif (!$oldContainer || \get_class($this->container) !== $oldContainer->name) {
                     flock($lock, \LOCK_UN);
@@ -543,8 +547,8 @@ abstract class Kernel implements KernelInterface, RebootableInterface, Terminabl
             if ($collectDeprecations) {
                 restore_error_handler();
 
-                file_put_contents($buildDir.'/'.$class.'Deprecations.log', serialize(array_values($collectedLogs)));
-                file_put_contents($buildDir.'/'.$class.'Compiler.log', null !== $container ? implode("\n", $container->getCompiler()->getLog()) : '');
+                @file_put_contents($buildDir.'/'.$class.'Deprecations.log', serialize(array_values($collectedLogs)));
+                @file_put_contents($buildDir.'/'.$class.'Compiler.log', null !== $container ? implode("\n", $container->getCompiler()->getLog()) : '');
             }
         }
 
@@ -642,6 +646,7 @@ abstract class Kernel implements KernelInterface, RebootableInterface, Terminabl
         $this->prepareContainer($container);
 
         if (null !== $cont = $this->registerContainerConfiguration($this->getContainerLoader($container))) {
+            trigger_deprecation('symfony/http-kernel', '5.3', 'Returning a ContainerBuilder from "%s::registerContainerConfiguration()" is deprecated.', get_debug_type($this));
             $container->merge($cont);
         }
 
@@ -751,15 +756,16 @@ abstract class Kernel implements KernelInterface, RebootableInterface, Terminabl
      */
     protected function getContainerLoader(ContainerInterface $container)
     {
+        $env = $this->getEnvironment();
         $locator = new FileLocator($this);
         $resolver = new LoaderResolver([
-            new XmlFileLoader($container, $locator),
-            new YamlFileLoader($container, $locator),
-            new IniFileLoader($container, $locator),
-            new PhpFileLoader($container, $locator),
-            new GlobFileLoader($container, $locator),
-            new DirectoryLoader($container, $locator),
-            new ClosureLoader($container),
+            new XmlFileLoader($container, $locator, $env),
+            new YamlFileLoader($container, $locator, $env),
+            new IniFileLoader($container, $locator, $env),
+            new PhpFileLoader($container, $locator, $env, class_exists(ConfigBuilderGenerator::class) ? new ConfigBuilderGenerator($this->getBuildDir()) : null),
+            new GlobFileLoader($container, $locator, $env),
+            new DirectoryLoader($container, $locator, $env),
+            new ClosureLoader($container, $env),
         ]);
 
         return new DelegatingLoader($resolver);

@@ -5,14 +5,17 @@ namespace Illuminate\Validation;
 use BadMethodCallException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Translation\Translator;
+use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ImplicitRule;
 use Illuminate\Contracts\Validation\Rule as RuleContract;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
+use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Fluent;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use RuntimeException;
+use stdClass;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Validator implements ValidatorContract
@@ -147,6 +150,13 @@ class Validator implements ValidatorContract
     public $customValues = [];
 
     /**
+     * Indicates if the validator should stop on the first rule failure.
+     *
+     * @var bool
+     */
+    protected $stopOnFirstFailure = false;
+
+    /**
      * All of the custom validator extensions.
      *
      * @var array
@@ -220,6 +230,9 @@ class Validator implements ValidatorContract
         'RequiredWithAll',
         'RequiredWithout',
         'RequiredWithoutAll',
+        'Prohibited',
+        'ProhibitedIf',
+        'ProhibitedUnless',
         'Same',
         'Unique',
     ];
@@ -373,6 +386,10 @@ class Validator implements ValidatorContract
                 continue;
             }
 
+            if ($this->stopOnFirstFailure && $this->messages->isNotEmpty()) {
+                break;
+            }
+
             foreach ($rules as $rule) {
                 $this->validateAttribute($attribute, $rule);
 
@@ -489,7 +506,7 @@ class Validator implements ValidatorContract
 
         $results = [];
 
-        $missingValue = Str::random(10);
+        $missingValue = new stdClass;
 
         foreach (array_keys($this->getRules()) as $key) {
             $value = data_get($this->getData(), $key, $missingValue);
@@ -515,7 +532,7 @@ class Validator implements ValidatorContract
 
         [$rule, $parameters] = ValidationRuleParser::parse($rule);
 
-        if ($rule == '') {
+        if ($rule === '') {
             return;
         }
 
@@ -732,6 +749,14 @@ class Validator implements ValidatorContract
         $attribute = $this->replacePlaceholderInString($attribute);
 
         $value = is_array($value) ? $this->replacePlaceholders($value) : $value;
+
+        if ($rule instanceof ValidatorAwareRule) {
+            $rule->setValidator($this);
+        }
+
+        if ($rule instanceof DataAwareRule) {
+            $rule->setData($this->data);
+        }
 
         if (! $rule->passes($attribute, $value)) {
             $this->failedRules[$attribute][get_class($rule)] = [];
@@ -1070,6 +1095,19 @@ class Validator implements ValidatorContract
                 $this->addRules([$key => $rules]);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Instruct the validator to stop validating after the first rule failure.
+     *
+     * @param  bool  $stopOnFirstFailure
+     * @return $this
+     */
+    public function stopOnFirstFailure($stopOnFirstFailure = true)
+    {
+        $this->stopOnFirstFailure = $stopOnFirstFailure;
 
         return $this;
     }

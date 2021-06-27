@@ -1,6 +1,6 @@
 
 ### Login Credentials
-* Root(Admin) : `root@kathford.com` : `secret`
+* Root(Admin) : `root@Kathford.com` : `secret`
 
 ### Backend Development Instructions
 

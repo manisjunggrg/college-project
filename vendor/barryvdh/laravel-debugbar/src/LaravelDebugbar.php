@@ -147,15 +147,13 @@ class LaravelDebugbar extends DebugBar
         }
 
         if ($this->shouldCollect('time', true)) {
-            $this->addCollector(new TimeDataCollector());
+            $startTime = $app['request']->server('REQUEST_TIME_FLOAT');
+            $this->addCollector(new TimeDataCollector($startTime));
 
-            if (! $this->isLumen()) {
+            if (! $this->isLumen() && $startTime) {
                 $this->app->booted(
-                    function () use ($debugbar) {
-                        $startTime = $this->app['request']->server('REQUEST_TIME_FLOAT');
-                        if ($startTime) {
-                            $debugbar['time']->addMeasure('Booting', $startTime, microtime(true));
-                        }
+                    function () use ($debugbar, $startTime) {
+                        $debugbar['time']->addMeasure('Booting', $startTime, microtime(true));
                     }
                 );
             }
@@ -318,6 +316,8 @@ class LaravelDebugbar extends DebugBar
                 $queryCollector->mergeBacktraceExcludePaths($excludePaths);
             }
 
+            $queryCollector->setDurationBackground($this->app['config']->get('debugbar.options.db.duration_background'));
+
             if ($this->app['config']->get('debugbar.options.db.explain.enabled')) {
                 $types = $this->app['config']->get('debugbar.options.db.explain.types');
                 $queryCollector->setExplainSource(true, $types);
@@ -344,7 +344,7 @@ class LaravelDebugbar extends DebugBar
                         $db,
                         $queryCollector
                     ) {
-                        if (!$this->shouldCollect('db', true)) {
+                        if (!app(static::class)->shouldCollect('db', true)) {
                             return; // Issue 776 : We've turned off collecting after the listener was attached
                         }
                         // Laravel 5.2 changed the way some core events worked. We must account for
@@ -361,7 +361,7 @@ class LaravelDebugbar extends DebugBar
                         }
 
                         //allow collecting only queries slower than a specified amount of milliseconds
-                        $threshold = $this->app['config']->get('debugbar.options.db.slow_threshold', false);
+                        $threshold = app('config')->get('debugbar.options.db.slow_threshold', false);
                         if (!$threshold || $time > $threshold) {
                             $queryCollector->addQuery((string)$query, $bindings, $time, $connection);
                         }
