@@ -2,7 +2,7 @@
 
 namespace Kathford\Controller\Admin;
 use Exception;
-use Kathford\Entities\{{ Model }};
+use Kathford\Entities\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -10,19 +10,19 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use Kathford\Services\{{ Controller }}Service;
+use Kathford\Services\ProductService;
 
-class {{ Controller }}Controller extends Controller
+class ProductController extends Controller
 {
 
-    protected ${{variable}}Service;
-    protected $view_path = 'admin.{{variable}}';
+    protected $productService;
+    protected $view_path = 'admin.product';
     protected $model;
 
-    public function __construct( {{ Controller }}Service ${{variable}}Service)
+    public function __construct( ProductService $productService)
     {
-        $this->{{variable}}Service = ${{variable}}Service;
-        $this->model = new {{ Model }}();
+        $this->productService = $productService;
+        $this->model = new Product();
     }
 
      /**
@@ -38,23 +38,23 @@ class {{ Controller }}Controller extends Controller
             where(function ($query) use ($request){
 
                 if($request->has('filter_name') && $request->get('filter_name')){
-                    $query->where('{{variable}}.name','like','%'.$request->get('filter_name').'%');
+                    $query->where('product.name','like','%'.$request->get('filter_name').'%');
                 }
 
                 if($request->has('filter_email') && $request->get('filter_email')){
-                    $query->where('{{variable}}.email', 'like', '%'. $request->get('filter_email'). '%');
+                    $query->where('product.email', 'like', '%'. $request->get('filter_email'). '%');
                 }
 
                 if($request->has('filter_message') && $request->get('filter_message')){
-                    $query->where('{{variable}}.message', 'like', '%'.$request->get('filter_message').'%');
+                    $query->where('product.message', 'like', '%'.$request->get('filter_message').'%');
                 }
 
                 if($request->has('filter_created_at') && $request->get('filter_created_at')){
-                    $query->where('{{variable}}.created_at', 'like', '%'.$request->get('filter_created_at').'%');
+                    $query->where('product.created_at', 'like', '%'.$request->get('filter_created_at').'%');
                 }
 
                if ($request->has('filter_status') && $request->get('filter_status') && $request->get('filter_status') !== 'all') {
-                   $query->where('{{variable}}.status', $request->get('filter_status') == 'seen' ? 1 : 0);
+                   $query->where('product.status', $request->get('filter_status') == 'seen' ? 1 : 0);
                }
 
            })->latest()
@@ -89,11 +89,11 @@ class {{ Controller }}Controller extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  {{ Model }}  $id
+     * @param  Product  $id
      * @return Application|Factory|View|Response
      */
 
-    public function show({{ Model }} $id)
+    public function show(Product $id)
     {
         $data = [];
         $data['row'] = $id;
@@ -103,11 +103,11 @@ class {{ Controller }}Controller extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  {{ Model }}  $id
+     * @param  Product  $id
      * @return Application|Factory|View|Response
      */
 
-    public function edit({{ Model }} $id)
+    public function edit(Product $id)
     {
         $data = [];
         $data['row'] = $id;
@@ -118,11 +118,11 @@ class {{ Controller }}Controller extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param {{ Model }} $id
+     * @param Product $id
      * @return Application|Factory|View|Response
      */
 
-    public function update(Request $request, {{ Model }} $id)
+    public function update(Request $request, Product $id)
     {
         //
     }

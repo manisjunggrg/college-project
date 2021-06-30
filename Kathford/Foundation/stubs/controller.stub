@@ -5,7 +5,7 @@ namespace App\Http\Controllers{MODEL_NAMESPACE};
 use Illuminate\Http\Request;
 use Kathford\Services\{CLASS_NAME}Service;
 use Kathford\Entities\{CLASS_NAME};
-use Kathford\Controller\BaseController;
+use App\Http\Controllers\Controller;
 use Kathford\Requests\{CLASS_NAME}\{
     StoreRequest,
     UpdateRequest
@@ -15,7 +15,7 @@ use Kathford\Requests\{CLASS_NAME}\{
  * Class {CLASS_NAME}Controller
  * @package App\Http\Controllers
  */
-class {CLASS_NAME}Controller extends BaseController
+class {CLASS_NAME}Controller extends Controller
 {
     protected $view_path = '{LOWER_CLASS_NAME}';
     protected $base = "{LOWER_CLASS_NAME}";

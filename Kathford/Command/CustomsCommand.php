@@ -96,7 +96,7 @@ class CustomsCommand extends Command
         $this->indexPage($class_name);
         $this->editPage($class_name);
         $this->createPage($class_name);
-        $this->createForm($class_name);
+        $this->customForm($class_name);
         $this->tablePage($class_name);
         $this->scriptPage($class_name);
         $this->showPage($class_name);
@@ -133,7 +133,7 @@ class CustomsCommand extends Command
     public function createForm($class_name)
     {
         $form = file_get_contents(base_path('Kathford/Foundation/stubs/views/form.blade.stub'));
-        File::put(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name) . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'form.blade.php'), $form);
+        File::put(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name) . DIRECTORY_SEPARATOR . 'form.blade.php'), $form);
     }
 
     public function tablePage($class_name)
