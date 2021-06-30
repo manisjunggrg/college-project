@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Kathford\Services;
 
 use Illuminate\View\View;

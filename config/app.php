@@ -174,7 +174,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Kathford\ServiceProvider\KathfordProviderServiceProvider::class,
+        Kathford\ServiceProvider\KathfordServiceProvider::class,
         \Kathford\ServiceProvider\ComposerServiceProvider::class
 
     ],

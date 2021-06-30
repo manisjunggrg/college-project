@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/profile', function (){return view('profile');});
 
 Route::group(
     ['middleware' => ['auth'],
@@ -25,10 +21,6 @@ Route::group(
         'namespace' => 'Kathford\\Controller\\Admin\\'],
 
     function () {
-           Route::resource('category','CategoryController');
-           Route::get('home',['as'=>'dashboard.index','uses'=>'CategoryController@index']);
-           Route::get('home',['as'=>'slider.index','uses'=>'CategoryController@index']);
-           Route::get('home',['as'=>'profile','uses'=>'CategoryController@index']);
 
            /* Hospital Web  Path*/
            Route::resource('hospital','HospitalController');

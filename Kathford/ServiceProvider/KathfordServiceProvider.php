@@ -3,12 +3,13 @@
 
 namespace Kathford\ServiceProvider;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Kathford\Command\CustomsCommand;
 
-class KathfordProviderServiceProvider extends ServiceProvider
+class KathfordServiceProvider extends ServiceProvider
 {
-   public function register()
+    public function register()
    {
 
    }

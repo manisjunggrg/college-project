@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox ">
-                    @include('admin.layouts.includes.breadcrumb',['base'=>'{base}','title'=>'{base}','panel'=>'{base}'])
+                    @include('admin.layouts.partials.breadcrumb',['base'=>'{base}','title'=>'{base}','panel'=>'{base}'])
                     <div class="ibox-content">
                     {!! Form::model($data['{SMALL_CASE_CLASS_NAME}'], ['route' => [$base['base_route'].'.update',$data['{SMALL_CASE_CLASS_NAME}']->id ],
                              'method' => 'put']) !!}
@@ -17,5 +17,4 @@
         </div>
     </div>
 
-    @include('admin.layouts.includes.copyright-section')
 @endsection

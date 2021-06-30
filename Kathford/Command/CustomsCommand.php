@@ -108,8 +108,8 @@ class CustomsCommand extends Command
         $viewString = file_get_contents(base_path('Kathford/Foundation/stubs/views/index.blade.stub'));
         if (!file_exists(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name))))
             mkdir(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name)));
-        if (!file_exists(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name).DIRECTORY_SEPARATOR.'includes')))
-            mkdir(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name).DIRECTORY_SEPARATOR.'includes'));
+        if (!file_exists(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name).DIRECTORY_SEPARATOR.'partials')))
+            mkdir(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name).DIRECTORY_SEPARATOR.'partials'));
         $viewString = str_replace(["{base}"], strtolower($class_name),  $viewString);
         File::put(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name) . DIRECTORY_SEPARATOR . 'index.blade.php'), $viewString);
 
@@ -133,21 +133,25 @@ class CustomsCommand extends Command
     public function createForm($class_name)
     {
         $form = file_get_contents(base_path('Kathford/Foundation/stubs/views/form.blade.stub'));
-        File::put(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name) . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'form.blade.php'), $form);
+        File::put(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name) . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'form.blade.php'), $form);
     }
 
     public function tablePage($class_name)
     {
         $table = file_get_contents(base_path('Kathford/Foundation/stubs/views/table.blade.stub'));
-        File::put(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name) . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'table.blade.php'), $table);
+        File::put(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name) . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'table.blade.php'), $table);
     }
 
     public function scriptPage($class_name)
     {
         $script = file_get_contents(base_path('Kathford/Foundation/stubs/views/script.blade.stub'));
-        File::put(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name) . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'script.blade.php'), $script);
+        File::put(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name) . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'script.blade.php'), $script);
     }
-
+    public function customForm($class_name)
+    {
+        $form = file_get_contents(base_path('Kathford/Foundation/stubs/views/filter-form.blade.stub'));
+        File::put(resource_path('views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . strtolower($class_name) . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'filter-form.blade.php'), $form);
+    }
     public function showPage($class_name)
     {
         $show = file_get_contents(base_path('Kathford/Foundation/stubs/views/show.blade.stub'));

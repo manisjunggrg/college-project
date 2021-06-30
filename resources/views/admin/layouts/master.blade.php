@@ -6,7 +6,6 @@
 <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed toolbar-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
 
 <div class="d-flex flex-column flex-root">
-    <!--begin::Page-->
     <div class="page d-flex flex-row flex-column-fluid">
 
         @include('admin.layouts.partials.sidebar')
@@ -25,7 +24,6 @@
 </div>
 
 <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-    <!--begin::Svg Icon | path: icons/duotone/Navigation/Up-2.svg-->
     <span class="svg-icon">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -38,16 +36,8 @@
     <!--end::Svg Icon-->
 </div>
 
-<script src="{{ asset('admin/plugins/global/plugins.bundle.js') }}"></script>
-<script src="{{ asset('admin/js/scripts.bundle.js') }}"></script>
-<script src="{{ asset('admin/js/custom/widgets.js') }}"></script>
-<script src="{{ asset('admin/js/custom/apps/chat/chat.js') }}"></script>
-<script src="{{ asset('admin/js/custom/modals/create-app.js') }}"></script>
-<script src="{{ asset('admin/js/custom/modals/upgrade-plan.js') }}"></script>
-@stack('js')
+@include('admin.layouts.partials.script')
 
 </body>
-
-
 
 </html>

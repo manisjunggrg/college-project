@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 /**
- * Trait Responsable
+ * Trait Responsible
  * @package Foundation\Mixins
  */
 trait Responsable
@@ -18,7 +18,7 @@ trait Responsable
      * @param $status
      * @return JsonResponse
      */
-    public function KathfordResponse($body, $metas = [], $status)
+    public function KathfordResponse($body, $metas = [], $status): JsonResponse
     {
         return response()
             ->json([
