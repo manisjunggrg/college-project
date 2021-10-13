@@ -14,20 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-Route::group(
-    ['middleware' => ['auth'],
-        'prefix' => 'admin/',
-        'as' => 'admin.',
-        'namespace' => 'Kathford\\Controller\\Admin\\'],
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-    function () {
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-           /* Hospital Web  Path*/
-           Route::resource('hospital','HospitalController');
-
-           /* User Data Web  Path*/
-           Route::resource('population','PopulationController');
-    });
-
-
-
+require __DIR__.'/auth.php';

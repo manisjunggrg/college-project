@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '76c75f56a66fc0689da98c605edbf752c0a55527',
+        'reference' => 'ae0aff6b2736fc4c2d61584340314dced8ff85f5',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -421,6 +421,15 @@
             'reference' => '62b3cb7516a605634416ceb386c6f2b467bc5f45',
             'dev_requirement' => false,
         ),
+        'laravel/breeze' => array(
+            'pretty_version' => 'v1.4.2',
+            'version' => '1.4.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/breeze',
+            'aliases' => array(),
+            'reference' => '221f1ffbaedc218a3c5513fe2eb95155605ab7b2',
+            'dev_requirement' => true,
+        ),
         'laravel/framework' => array(
             'pretty_version' => 'v8.48.2',
             'version' => '8.48.2.0',
@@ -436,7 +445,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '76c75f56a66fc0689da98c605edbf752c0a55527',
+            'reference' => 'ae0aff6b2736fc4c2d61584340314dced8ff85f5',
             'dev_requirement' => false,
         ),
         'laravel/legacy-factories' => array(
@@ -561,6 +570,15 @@
             'replaced' => array(
                 0 => '*',
             ),
+        ),
+        'livewire/livewire' => array(
+            'pretty_version' => 'v2.6.7',
+            'version' => '2.6.7.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../livewire/livewire',
+            'aliases' => array(),
+            'reference' => '7e8ded3cc496858b0a35c1c9355e5af79985bd0c',
+            'dev_requirement' => false,
         ),
         'lncd/oauth2' => array(
             'dev_requirement' => false,

@@ -12,7 +12,7 @@ class CustomsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'Kathford:generate {CLASS_NAME}';
+    protected $signature = 'kathford:generate {CLASS_NAME}';
 
     /**
      * The console command description.
