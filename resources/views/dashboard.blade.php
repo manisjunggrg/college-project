@@ -1,9 +1,9 @@
 <x-app-layout>
-    @for($i=0; $i < 9; $i++)
+    @for($i=1; $i < 8; $i++)
         <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-6xl mt-10">
             <div class="md:flex">
                 <div class="md:flex-shrink-0">
-                    <img class="h-48 w-full object-cover md:h-full md:w-48" src="{{ asset('assets/img.jpg') }}"
+                    <img class="h-48 w-full object-cover md:h-full md:w-48" src="{{ asset('storage/products/men'.$i.'.jpg') }}"
                          alt="Man looking at item at a store">
                 </div>
                 <div class="p-5">
@@ -27,7 +27,7 @@
                         @endphp
                         <div class="uppercase font-bold">
                             Status
-                            <p class="text-{{ $status == 'Available' ? 'green' : 'red' }}-500 font-bold mt-2">
+                            <p class="text-{{ $status == 'Available' ? 'green' : 'red' }}-500 hover:bg-{{ $status == 'Available' ? 'green' : 'red' }}-500 text-white font-bold px-1 border-b-4  hover:text-white rounded mt-2">
                                 {{ $status }}
                             </p>
                         </div>
@@ -43,9 +43,9 @@
                         ${{ random_int(10, 100) }}.00
                     </div>
 
-                    <button class="bg-blue-600  text-sm uppercase py-2 px-4 rounded-md text-white transition-all duration-200 mb-3 w-25">View Detail</button>
+                    <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">View Detail</button>
 
-                    <button class="bg-red-600  text-sm uppercase py-2 px-4 rounded-md text-white transition-all duration-200 w-25">Bid Now</button>
+                    <button class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded mt-3">Bid Now</button>
                 </div>
             </div>
         </div>
