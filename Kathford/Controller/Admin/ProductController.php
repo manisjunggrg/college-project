@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Kathford\Services\ProductService;
 
@@ -27,8 +28,8 @@ class ProductController extends Controller
      /**
      * Display a listing of the resource.
      * @param Request $request
-     * @return Application|Factory|View
-      */
+     * @return Application|Factory|View|Response
+     */
 
     public function index(Request $request)
     {
@@ -65,7 +66,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Application|Factory|View
+     * @return Application|Factory|View|Response
      */
 
     public function create()
@@ -77,7 +78,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return void
+     * @return Application|Factory|View|Response
      */
 
     public function store(Request $request)
@@ -89,7 +90,7 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param  Product  $id
-     * @return Application|Factory|View
+     * @return Application|Factory|View|Response
      */
 
     public function show(Product $id)
@@ -103,7 +104,7 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  Product  $id
-     * @return Application|Factory|View
+     * @return Application|Factory|View|Response
      */
 
     public function edit(Product $id)
@@ -118,7 +119,7 @@ class ProductController extends Controller
      *
      * @param Request $request
      * @param Product $id
-     * @return void
+     * @return Application|Factory|View|Response
      */
 
     public function update(Request $request, Product $id)
