@@ -1,9 +1,4 @@
-@props(['hashName'])
-<div
-        x-data="{ show: false }"
-        x-show="show"
-        @hashchange.window="show = (location.hash === '#{{ $hashName }}');"
-        style="display: none">
+<div style="display: none">
 
     <div class="fixed inset-0 bg-gray-900 opacity-90"></div>
 
@@ -11,15 +6,15 @@
         <div class="flex flex-col h-full justify-between">
 
             <header class="font-bold text-lg">
-              {{ $header }}
+                {{ $header }}
             </header>
 
-            <main class="mb-4">
-               {{ $body }}
+            <main class="mb-4 mt-2">
+                {{ $body }}
             </main>
 
             <footer>
-              {{ $footer }}
+                {{ $footer }}
             </footer>
 
         </div>

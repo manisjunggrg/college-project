@@ -1,74 +1,71 @@
 <?php
 
-
 namespace Kathford\Traits;
-
 
 trait CrudTrait
 {
 
-    public function createOrUpdate(array $data, $search , string $key = 'title')
+    public function createOrUpdate(array $data, $search, string $key = 'title')
     {
         return $this->model->updateOrCreate(
-            [ $key => $search ],
+            [$key => $search],
             $data
         );
     }
 
-    public function find( $property )
+    public function find($property)
     {
         return $this->model
-            ->where('id' , $property)
-            ->orWhere('slug' ,$property)
+            ->where('id', $property)
+            ->orWhere('slug', $property)
             ->firstOrFail();
     }
 
-    public function new( array $data )
+    public function new(array $data)
     {
-        return $this->model->create( $data );
+        return $this->model->create($data);
     }
 
     public function updates(array $data, $model)
     {
         $instance = $model;
-        $model->update( $data );
+        $model->update($data);
 
         return $instance;
     }
 
-    public function save( $key = 'name', array $data = [])
+    public function save($key = 'name', array $data = [])
     {
         return $this->model->updateOrCreate(
-            [ "{$key}" => $data[$key]],
+            ["{$key}" => $data[$key]],
             $data
         );
     }
 
-    public function get( $paginate = null )
+    public function get($paginate = null)
     {
         $that = $this->model;
 
-        if(is_null($paginate))
-        {
+        if (is_null($paginate)) {
             return $that->latest()
                 ->get();
         }
-        return $that->latest()->paginate( $paginate );
+        return $that->latest()->paginate($paginate);
     }
 
-    public function destroy( $model )
+    public function destroy($model)
     {
         $model->delete();
 
         return true;
     }
 
-    public function pluckEntity( $prepend = null, $append = null, string $key = 'name' )
+    public function pluckEntity($prepend = null, $append = null, string $key = 'name')
     {
         $model = $this->model->pluck($key, 'id');
         if (is_null($append))
             return $model;
-        return $model->prepend( $prepend, 0 );
+        return $model->prepend($prepend, 0);
     }
 
     public function query()

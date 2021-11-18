@@ -75,7 +75,7 @@ class CustomsCommand extends Command
     {
         $modelString = file_get_contents(base_path('Kathford/Foundation/Mixing/model.create.stub'));
         $modelString = str_replace(["{{ Model }}"], ucfirst($class_name),  $modelString);
-        File::put(base_path('Kathford'. DIRECTORY_SEPARATOR .'Entities' . DIRECTORY_SEPARATOR . ucfirst($class_name) . '.php'), $modelString);
+        File::put(base_path('App'. DIRECTORY_SEPARATOR .'Models' . DIRECTORY_SEPARATOR . ucfirst($class_name) . '.php'), $modelString);
         $this->info(ucfirst($class_name) . ' Model Created .');
     }
 
