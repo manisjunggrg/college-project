@@ -36,7 +36,7 @@ class CategoryService extends BaseService
      * @param $filters
      * @return Collection|array
      */
-    public function getCategories($filters): Collection|array
+    public function getCategories($filters)
     {
         $name = Arr::get($filters, 'name');
         $slug = Arr::get($filters, 'slug');

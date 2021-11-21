@@ -1,1 +1,4 @@
 storage
+.env
+composer.json
+public
