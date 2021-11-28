@@ -71,4 +71,9 @@ class CategoryService extends BaseService
             ->get();
     }
 
+    public function getParentCategories()
+    {
+        return $this->model->pluck('id', 'name')->orderBy('order');
+    }
+
 }

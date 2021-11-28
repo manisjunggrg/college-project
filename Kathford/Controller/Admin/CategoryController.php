@@ -43,12 +43,14 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Application|Factory|View|Response
+     * @return Application|Factory|View
      */
 
     public function create()
     {
-        dd('in a process');
+        $data = [];
+        $data = $this->categoryService->getParentCategories();
+       return view('admin.category.create', compact('data'));
     }
 
     /**
