@@ -1706,14 +1706,6 @@ namespace Illuminate\Support\Facades {
     class Redis {}
     
     /**
-     * @see \Illuminate\Http\Request::hasValidSignature
-     * @method static bool hasValidSignature($absolute = true)
-     * @see \Illuminate\Http\Request::validateWithBag
-     * @method static array validateWithBag(string $errorBag, array $rules, ...$params)
-     * @see \Illuminate\Http\Request::hasValidRelativeSignature
-     * @method static bool hasValidRelativeSignature()
-     * @see \Illuminate\Http\Request::validate
-     * @method static array validate(array $rules, ...$params)
      * @see \Illuminate\Http\Request::createFrom
      * @method static \Illuminate\Http\Request createFrom(\Illuminate\Http\Request $from, \Illuminate\Http\Request|null $to = null)
      * @see \Symfony\Component\HttpFoundation\Request::hasPreviousSession
@@ -1848,6 +1840,8 @@ namespace Illuminate\Support\Facades {
      * @method static bool matchesType(string $actual, string $type)
      * @see \Illuminate\Http\Concerns\InteractsWithContentTypes::acceptsJson
      * @method static bool acceptsJson()
+     * @see \Illuminate\Http\Request::validate
+     * @method static array validate(array $rules, ...$params)
      * @see \Illuminate\Http\Concerns\InteractsWithInput::whenHas
      * @method static mixed whenHas(string $key, callable $callback)
      * @see \Illuminate\Http\Concerns\InteractsWithContentTypes::prefers
@@ -1872,6 +1866,8 @@ namespace Illuminate\Support\Facades {
      * @method static void setMethod(string $method)
      * @see \Symfony\Component\HttpFoundation\Request::getHost
      * @method static string getHost()
+     * @see \Illuminate\Http\Request::hasValidSignature
+     * @method static bool hasValidSignature(bool $absolute = true)
      * @see \Symfony\Component\HttpFoundation\Request::getPassword
      * @method static null|string getPassword()
      * @see \Symfony\Component\HttpFoundation\Request::getLocale
@@ -1948,6 +1944,8 @@ namespace Illuminate\Support\Facades {
      * @method static null|string getClientIp()
      * @see \Illuminate\Support\Traits\Macroable::mixin
      * @method static void mixin(object $mixin, bool $replace = true)
+     * @see \Illuminate\Http\Request::validateWithBag
+     * @method static array validateWithBag(string $errorBag, array $rules, ...$params)
      * @see \Illuminate\Http\Concerns\InteractsWithInput::hasCookie
      * @method static bool hasCookie(string $key)
      * @see \Symfony\Component\HttpFoundation\Request::getUser
@@ -2030,6 +2028,8 @@ namespace Illuminate\Support\Facades {
      * @method static mixed user(null|string $guard = null)
      * @see \Symfony\Component\HttpFoundation\Request::getLanguages
      * @method static array getLanguages()
+     * @see \Illuminate\Http\Request::hasValidRelativeSignature
+     * @method static bool hasValidRelativeSignature()
      */
     class Request {}
     
@@ -2781,6 +2781,39 @@ namespace Livewire {
     class Livewire {}
 }
 
+namespace Yajra\DataTables\Facades {
+    
+    /**
+     * @see \Illuminate\Support\Traits\Macroable::macro
+     * @method static void macro(string $name, callable|object $macro)
+     * @see \Yajra\DataTables\DataTables::resource
+     * @method static \Yajra\DataTables\ApiResourceDataTable|\Yajra\DataTables\DataTableAbstract resource($resource)
+     * @see \Yajra\DataTables\DataTables::query
+     * @method static \Yajra\DataTables\DataTableAbstract|\Yajra\DataTables\QueryDataTable query(\Illuminate\Database\Query\Builder|mixed $builder)
+     * @see \Yajra\DataTables\DataTables::queryBuilder
+     * @method static \Yajra\DataTables\DataTableAbstract|\Yajra\DataTables\QueryDataTable queryBuilder($builder)
+     * @see \Yajra\DataTables\DataTables::getConfig
+     * @method static \Yajra\DataTables\Utilities\Config getConfig()
+     * @see \Yajra\DataTables\DataTables::collection
+     * @method static \Yajra\DataTables\CollectionDataTable|\Yajra\DataTables\DataTableAbstract collection(array|\Illuminate\Support\Collection $collection)
+     * @see \Yajra\DataTables\DataTables::eloquent
+     * @method static \Yajra\DataTables\DataTableAbstract|\Yajra\DataTables\EloquentDataTable eloquent(\Illuminate\Database\Eloquent\Builder|mixed $builder)
+     * @see \Illuminate\Support\Traits\Macroable::mixin
+     * @method static void mixin(object $mixin, bool $replace = true)
+     * @see \Illuminate\Support\Traits\Macroable::hasMacro
+     * @method static bool hasMacro(string $name)
+     * @see \Yajra\DataTables\DataTables::of
+     * @method static mixed of($source)
+     * @see \Yajra\DataTables\DataTables::getHtmlBuilder
+     * @method static \Yajra\DataTables\Html\Builder getHtmlBuilder()
+     * @see \Yajra\DataTables\DataTables::getRequest
+     * @method static \Yajra\DataTables\Utilities\Request getRequest()
+     * @see \Yajra\DataTables\DataTables::make
+     * @method static mixed make($source)
+     */
+    class DataTables {}
+}
+
 namespace {
     class App extends Illuminate\Support\Facades\App {}
     class Arr extends Illuminate\Support\Arr {}
@@ -2794,6 +2827,7 @@ namespace {
     class Cookie extends Illuminate\Support\Facades\Cookie {}
     class Crypt extends Illuminate\Support\Facades\Crypt {}
     class DB extends Illuminate\Support\Facades\DB {}
+    class DataTables extends Yajra\DataTables\Facades\DataTables {}
     class Debugbar extends Barryvdh\Debugbar\Facade {}
     class Eloquent extends Illuminate\Database\Eloquent\Model {}
     class Event extends Illuminate\Support\Facades\Event {}

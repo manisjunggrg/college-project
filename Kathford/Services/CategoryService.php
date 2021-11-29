@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Kathford\Lib\Category\IsShown;
+use Kathford\Lib\Category\Level;
 use Kathford\Lib\Status;
 use Kathford\Services\common\BaseService;
 
@@ -73,7 +74,7 @@ class CategoryService extends BaseService
 
     public function getParentCategories()
     {
-        return $this->model->pluck('id', 'name')->orderBy('order');
+        return $this->model->orderBy('order')->where('parent_id', '=', Level::PARENT)->pluck('name', 'id');
     }
 
 }

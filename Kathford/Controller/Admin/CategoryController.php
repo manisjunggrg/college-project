@@ -49,7 +49,7 @@ class CategoryController extends Controller
     public function create()
     {
         $data = [];
-        $data = $this->categoryService->getParentCategories();
+        $data['parent_category'] = $this->categoryService->getParentCategories();
        return view('admin.category.create', compact('data'));
     }
 
